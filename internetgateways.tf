@@ -1,0 +1,7 @@
+#internet gatway
+resource "aws_internet_gateway" "igw" {
+  vpc_id = "${aws_vpc.vpc.id}"
+  tags ={
+    "Environment" = "${var.environment_tag}"
+  }
+}
