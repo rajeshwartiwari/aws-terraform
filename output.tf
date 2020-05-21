@@ -7,10 +7,10 @@ output "public_subnets" {
 output "public_route_table_ids" {
   value = ["${aws_route_table.rtb_public.id}"]
 }
-output "public_instance_ip" {
+output "public_instance_ip1" {
   value = ["${aws_instance.publicInstance1.public_ip}"]
 }
 
-output "public_instance_ip" {
+output "public_instance_ip2" {
   value = ["${aws_instance.publicInstance2.public_ip}"]
 }
