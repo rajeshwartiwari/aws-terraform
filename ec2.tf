@@ -1,7 +1,7 @@
-resource "aws_iam_instance_profile" "kms_profile" {
-  name = "kms_profile"
-  role = "EC2KMSRole"
-}
+#resource "aws_iam_instance_profile" "kms_profile" {
+#  name = "kms_profile"
+#  role = "EC2KMSRole"
+#}
 
 resource "aws_instance" "publicInstance1" {
   ami           = "${var.instance_ami}"
