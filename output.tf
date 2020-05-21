@@ -8,5 +8,9 @@ output "public_route_table_ids" {
   value = ["${aws_route_table.rtb_public.id}"]
 }
 output "public_instance_ip" {
-  value = ["${aws_instance.publicInstance.public_ip}"]
+  value = ["${aws_instance.publicInstance1.public_ip}"]
+}
+
+output "public_instance_ip" {
+  value = ["${aws_instance.publicInstance2.public_ip}"]
 }
