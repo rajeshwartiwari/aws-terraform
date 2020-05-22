@@ -47,3 +47,8 @@ jobs:
               repo: context.repo.repo,
               body: process.env.STDOUT
             })
+            
+      - name: Terraform Delete
+        if: github.ref == 'refs/heads/delete'
+        run: terraform destroy -auto-approve
+
