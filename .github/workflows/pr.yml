@@ -31,4 +31,19 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan
+        run: terraform plan -no-color
+
+      - name: Comment with Plan
+        uses: actions/github-script@v1
+        if: github.event_name == 'pull_request'
+        env: 
+          STDOUT: "```${{ steps.plan.outputs.stdout }} ```" 
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.STDOUT
+            })
