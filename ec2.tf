@@ -13,20 +13,20 @@ resource "aws_instance" "publicInstance1" {
 	}
 }
 
-resource "aws_instance" "publicInstance2" {
-  ami           = "${var.instance_ami}"
-  instance_type = "${var.instance_type}"
-  subnet_id = "${aws_subnet.subnet_public.id}"
-  #iam_instance_profile = "${aws_iam_instance_profile.kms_profile.name}"
-  vpc_security_group_ids = ["${aws_security_group.sgpublic.id}"]
-  key_name = "lbgamwlinux"
-
-  tags ={
-		"Environment" = "${var.environment_tag}"
-    "Name" = "publicInstance2"
-	}
-}
-
+#ource "aws_instance" "publicInstance2" {
+#mi           = "${var.instance_ami}"
+#nstance_type = "${var.instance_type}"
+#ubnet_id = "${aws_subnet.subnet_public.id}"
+#iam_instance_profile = "${aws_iam_instance_profile.kms_profile.name}"
+#pc_security_group_ids = ["${aws_security_group.sgpublic.id}"]
+#ey_name = "lbgamwlinux"
+#
+#ags ={
+#		"Environment" = "${var.environment_tag}"
+#    "Name" = "publicInstance2"
+#	}
+#
+#
 
 resource "aws_instance" "privateInstance" {
   ami           = "${var.instance_ami}"
