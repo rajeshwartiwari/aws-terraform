@@ -13,10 +13,10 @@ provider "aws" {
    }
  }
 
-resource "aws_s3_bucket" "terraform_state" {
-  bucket = "cp-terraform-bootstrap-terraform-state"
-
-  versioning {
-    enabled = true
-  }
-}
+#esource "aws_s3_bucket" "terraform_state" {
+# bucket = "cp-terraform-bootstrap-terraform-state"
+#
+# versioning {
+#   enabled = true
+# }
+#
