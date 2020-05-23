@@ -47,7 +47,7 @@ jobs:
 
     - name: Comment with Delete
       uses: actions/github-script@v1
-      if: github.ref == 'refs/heads/delete' && github.event_name == 'pull_request'
+      if: github.ref == 'refs/heads/delete' && github.event_name == 'push'
       env:
         STDOUT: '```${{ steps.delete.outputs.stdout }} ```'
       with:
