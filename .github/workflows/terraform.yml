@@ -40,6 +40,20 @@ jobs:
       if: github.ref == 'refs/heads/master'
       run: terraform apply  -auto-approve
 
+    - name: Comment with apply
+      uses: actions/github-script@v1
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      env:
+        STDOUT: '```${{ steps.apply.outputs.stdout }} ```'
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: process.env.STDOUT
+          })
+
     - name: Terraform Destroy
       id: delete
       if: github.ref == 'refs/heads/delete'
@@ -54,7 +68,6 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           github.issues.createComment({
-            issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: process.env.STDOUT
