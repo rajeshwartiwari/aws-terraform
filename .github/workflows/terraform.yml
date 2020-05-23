@@ -35,11 +35,23 @@ jobs:
       run: terraform plan 
       
     - name: Terraform Apply
+      id: apply
       if: github.ref == 'refs/heads/master'
       run: terraform apply  -auto-approve
 
-    - name: Terraform Delete
-      run: terraform destroy -auto-approve
-
+    - name: Comment with Apply
+      uses: actions/github-script@v1
+      if: github.event_name == 'pull_request'
+      env:
+        STDOUT: '```${{ steps.apply.outputs.stdout }} ```'
+      with:
+        github-token: ${{secrets.GITHUB_TOKEN}}
+        script: |
+          github.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: process.env.STDOUT
+          })
 
       
