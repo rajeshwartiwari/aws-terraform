@@ -45,18 +45,4 @@ jobs:
       if: github.ref == 'refs/heads/delete'
       run: terraform destroy -auto-approve -no-color
 
-    - name: Comment with Delete
-      uses: actions/github-script@v1
-      if: github.ref == 'refs/heads/delete' && github.event_name == 'push'
-      env:
-        STDOUT: '```${{ steps.delete.outputs.stdout }} ```'
-      with:
-        github-token: ${{secrets.GITHUB_TOKEN}}
-        script: |
-          github.issues.createComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: process.env.STDOUT
-          })
-
       
