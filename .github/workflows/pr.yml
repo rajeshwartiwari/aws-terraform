@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - master
+
 jobs:
   Terraform:
     name: Terraform Plan
@@ -47,3 +48,8 @@ jobs:
               repo: context.repo.repo,
               body: process.env.STDOUT
             })
+            
+      - name: Terraform Delete
+        if: github.ref == 'refs/heads/delete'
+        run: terraform destroy -auto-approve
+
