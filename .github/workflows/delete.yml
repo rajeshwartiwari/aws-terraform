@@ -1,0 +1,46 @@
+name: Delete Request
+
+on:
+  pull_request:
+    branches:
+      - delete
+jobs:
+  Terraform:
+    name: Terraform Plan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        
+      - name: Configure Aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-2
+
+      - name: Terraform Setup
+        uses: hashicorp/setup-terraform@v1
+      
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Delete
+        id: delete
+        run: terraform delete -no-color
+
+      - name: Comment with Plan
+        uses: actions/github-script@v1
+        if: github.event_name == 'pull_request'
+        env:
+          STDOUT: '```${{ steps.delete.outputs.stdout }} ```'
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: process.env.STDOUT
+            })
