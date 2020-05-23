@@ -30,9 +30,11 @@ jobs:
       run: terraform init
         
     - name: Terraform validate
+      if: github.ref == 'refs/heads/master'
       run: terraform validate
       
     - name: Terraform Plan
+      if: github.ref == 'refs/heads/master'
       run: terraform plan 
       
     - name: Terraform Apply
