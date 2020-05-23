@@ -28,7 +28,8 @@ jobs:
 
       - name: Terraform Delete
         id: delete
-        run: terraform delete -no-color
+        if: github.ref == 'refs/heads/delete'
+        run: terraform destroy -no-color
 
       - name: Comment with Plan
         uses: actions/github-script@v1
