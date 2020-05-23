@@ -54,7 +54,7 @@ jobs:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
           github.issues.createComment({
-            issue_number:1231,
+            issue_number: context.issue.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: process.env.STDOUT
