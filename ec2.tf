@@ -30,7 +30,7 @@ resource "aws_instance" "publicInstance2" {
       "Environment" = "${var.environment_tag}"
       "Name" = "publicInstance2"
 	}
-
+}
 
 
 resource "aws_instance" "privateInstance" {
