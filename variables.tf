@@ -60,6 +60,16 @@ variable "instance_type" {
   description = "type for aws EC2 instance"
   default = "t2.micro"
 }
+
+
+variable "instance_ami1" {
+  description = "AMI for aws EC2 instance"
+  default = "ami-0664f33a476ecedc6"
+}
+variable "instance_type1" {
+  description = "type for aws EC2 instance"
+  default = "t2.medium"
+}
 variable "environment_tag" {
   description = "Environment tag"
   default = "PegaKMSDemo"
