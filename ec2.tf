@@ -33,6 +33,7 @@ resource "aws_instance" "publicInstance2" {
 }
 
 
+
 resource "aws_instance" "privateInstance" {
   ami           = "${var.instance_ami}"
   instance_type = "${var.instance_type}"
