@@ -15,3 +15,5 @@ resource "aws_vpc_endpoint" "kms" {
     "Environment" = "${var.environment_tag}"
   }
 }
+
+
